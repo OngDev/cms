@@ -6,8 +6,8 @@ export default {
     {
       path: '/',
       routes: [
-        { path: '/', component: '../pages/login' },
-        { path: '/home', component: '../pages/index' },
+        { path: '/', component: '../pages/index' },
+        { path: '/login', component: '../pages/login/index' },
       ],
     },
   ],

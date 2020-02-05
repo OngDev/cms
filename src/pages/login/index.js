@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import styles from './login.css';
+import styles from './index.css';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 class Login extends React.Component {
@@ -54,4 +53,4 @@ class Login extends React.Component {
 
 const LoginForm = Form.create({ name: 'login' })(Login);
 
-ReactDOM.render(<LoginForm />, document.getElementById('root'));
+export default LoginForm;
