@@ -1,0 +1,13 @@
+.loginForm {
+  background-color: rgb(245, 245, 245);
+  max-width: 500px;
+  height: auto;
+  padding: 10px;
+  margin: 0 auto;
+}
+.loginFormForgot {
+  float: right;
+}
+.loginFormButton {
+  width: 100%;
+}
