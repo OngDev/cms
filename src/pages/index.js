@@ -5,15 +5,16 @@ import { Layout, Menu, Breadcrumb, Icon, Avatar, Dropdown } from 'antd';
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <a href="http://www.alipay.com/">1st menu item</a>
-    </Menu.Item>
+  <Menu mode="horizontal">
+    <Menu.Item key="0">User Role</Menu.Item>
+    <hr></hr>
     <Menu.Item key="1">
-      <a href="http://www.taobao.com/">2nd menu item</a>
+      <a href="http://localhost:8000/userinfo">User Info</a>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key="3">3rd menu item</Menu.Item>
+    <Menu.Item key="3">
+      <a href="http://localhost:8000/login">Logout</a>
+    </Menu.Item>
   </Menu>
 );
 
