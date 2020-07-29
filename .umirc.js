@@ -3,11 +3,17 @@
 export default {
   treeShaking: true,
   routes: [
+    { path: '/login', component: '../pages/login/index' },
     {
       path: '/',
+      component: '../pages/index',
       routes: [
-        { path: '/', component: '../pages/index' },
-        { path: '/login', component: '../pages/login/index' },
+        {
+          routes: [
+            { path: '/', component: '../pages/analytic/index' },
+            { path: '/article', component: '../pages/article/index' },
+          ],
+        },
       ],
     },
   ],
