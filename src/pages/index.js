@@ -47,6 +47,12 @@ class LayoutCMS extends React.Component {
                 <span>Analytic</span>
               </Link>
             </Menu.Item>
+            <Menu.Item key="user">
+              <Link to="/user">
+                <UserOutlined />
+                <span>User</span>
+              </Link>
+            </Menu.Item>
             <Menu.Item key="article">
               <Link to="/article">
                 <UnorderedListOutlined />

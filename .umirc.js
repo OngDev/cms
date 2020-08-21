@@ -12,6 +12,10 @@ export default {
           routes: [
             { path: '/', component: '../pages/analytic/index' },
             {
+              path: '/user',
+              component: '../pages/user/index',
+            },
+            {
               path: '/article',
               component: '../pages/article/index',
             },

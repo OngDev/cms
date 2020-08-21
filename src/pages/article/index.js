@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './index.css';
+import styles from '../index.css';
 import { Link } from 'UMI';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Row, Col, Button, Divider, List } from 'antd';
+import { Button, Divider, List } from 'antd';
 import {
   PlusOutlined,
   EditOutlined,
