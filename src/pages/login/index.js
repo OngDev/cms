@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './index.css';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import styles from '../index.css';
+import { Form, Button } from 'antd';
+import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 
 class Login extends React.Component {
   handleSubmit = e => {
@@ -13,37 +14,26 @@ class Login extends React.Component {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const uriGoogle = 'http://localhost/';
+    const uriGithub = 'http://localhost/';
     return (
-      <Form onSubmit={this.handleSubmit} className={styles.loginForm}>
+      <Form name="normal_login" className={styles.loginForm} onFinish={this.handleSubmit}>
         <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-            />,
-          )}
+          <Button
+            className={styles.loginGoogle}
+            href={`https://user-anm.herokuapp.com/oauth2/authorize/google?redirect_uri=${uriGoogle}`}
+          >
+            <GoogleOutlined />
+            Sign in with Google
+          </Button>
         </Form.Item>
         <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true,
-          })(<Checkbox>Remember me</Checkbox>)}
-          <Button type="primary" htmlType="submit" className={styles.loginFormButton}>
-            Log in
+          <Button
+            className={styles.loginGithub}
+            href={`https://user-anm.herokuapp.com/oauth2/authorize/github?redirect_uri=${uriGithub}`}
+          >
+            <GithubOutlined />
+            Sign in with Github
           </Button>
         </Form.Item>
       </Form>
@@ -51,6 +41,4 @@ class Login extends React.Component {
   }
 }
 
-const LoginForm = Form.create({ name: 'login' })(Login);
-
-export default LoginForm;
+export default Login;
