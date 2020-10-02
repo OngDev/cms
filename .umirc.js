@@ -23,6 +23,10 @@ export default {
               path: '/article/edit',
               component: '../pages/article/edit',
             },
+            {
+              path: '/article/create',
+              component: '../pages/article/create',
+            },
           ],
         },
       ],
