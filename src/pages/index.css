@@ -8,7 +8,7 @@
 
 .content {
   background: #fff;
-  padding: 24px;
+  padding: 8px;
   min-height: 280px;
   margin: 0 16px;
 }
@@ -19,20 +19,30 @@
 
 .actionContainer {
   position: relative;
-  height: 32px;
+  height: 16px;
   width: auto;
 }
 
 .buttonCreate {
   position: absolute;
   right: 0;
+  /* margin: 0 8px; */
+}
+
+.cardArticle {
+  padding: 8px 0;
   margin: 0 8px;
 }
 
-.hiddenContent {
+.minContent {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.maxContent {
+  height: fit-content;
   margin-bottom: 8px;
 }
 
