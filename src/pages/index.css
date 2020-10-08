@@ -25,20 +25,17 @@
 
 .buttonCreate {
   position: absolute;
-  right: 0;
-  /* margin: 0 8px; */
+  right: 16px;
 }
 
-.cardArticle {
-  padding: 8px 0;
+.listArticle {
   margin: 0 8px;
 }
 
-.minContent {
+.titleArticle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 8px;
 }
 
 .maxContent {

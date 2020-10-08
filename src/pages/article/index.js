@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../index.css';
 import { Link } from 'UMI';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { Button, Divider, Card, Row, Col } from 'antd';
+import { Button, Divider, List } from 'antd';
 import {
   PlusOutlined,
   ReadOutlined,
@@ -16,68 +16,77 @@ import article from './dummydata';
 class ArticleList extends React.Component {
   state = {
     path: window.location.pathname,
-    articles: article.articles(),
-    selectedArticle: null,
+    data: article.articles(),
+    list: [],
+    itemShow: 6,
+    itemLoad: 3,
+    initLoading: true,
+    loading: false,
+    selectedArticle: '',
+  };
+
+  componentDidMount() {
+    let { data, itemShow } = this.state;
+    const currentList = this.state.list;
+    for (var i = 0; i < itemShow; i++) {
+      currentList.push(data[i]);
+    }
+    this.setState({ initLoading: false, list: currentList });
+  }
+
+  handleLoadMore = () => {
+    let { data, itemShow, itemLoad } = this.state;
+    const currentList = [];
+    const itemExist = data.length - itemShow;
+    if (itemExist >= itemLoad) {
+      for (var i = 0; i < itemShow + itemLoad; i++) {
+        currentList.push(data[i]);
+      }
+      this.setState({ itemShow: itemShow + itemLoad });
+    } else {
+      for (var i = 0; i < itemShow + itemExist; i++) {
+        currentList.push(data[i]);
+      }
+      this.setState({ itemShow: itemShow + itemExist });
+    }
+    if (itemShow + itemExist - currentList.length <= 0) {
+      this.setState({ loading: true });
+    }
+    this.setState({ list: currentList });
   };
 
   handleReadArticle = indexArticle => {
-    console.log('ok ' + indexArticle);
-    if (indexArticle != this.state.selectedArticle) {
-      this.setState({ selectedArticle: indexArticle });
-    } else {
-      this.setState({ selectedArticle: null });
+    // console.log('ok ' + indexArticle);
+    // if (indexArticle != this.state.selectedArticle) {
+    //   this.setState({ selectedArticle: indexArticle });
+    // }
+  };
+
+  handleTogglePublic = (articleId, state) => {
+    let currentArticle = this.state.list;
+    for (var i = 0; i < currentArticle.length; i++) {
+      if (currentArticle[i].id == articleId) {
+        currentArticle[i].public = !state;
+        this.setState({ list: currentArticle });
+      }
     }
   };
 
-  handleTogglePublic = (indexArticle, state) => {
-    let currentArticle = this.state.articles;
-    currentArticle[indexArticle].public = !state;
-    this.setState({ articles: currentArticle });
-  };
-
   render() {
-    const { path, articles, selectedArticle } = this.state;
-    const article = articles.map((data, index) => {
-      return (
-        <Col key={index} span={index == selectedArticle ? 24 : 12}>
-          <div className={styles.cardArticle} style={{}}>
-            <Card
-              type="inner"
-              hoverable={true}
-              activeTabKey={index}
-              title={data.title}
-              actions={[
-                <Button onClick={() => this.handleReadArticle(index)}>
-                  <ReadOutlined />
-                </Button>,
-                <Button type="primary">
-                  <Link to={`${path}/edit`}>
-                    <EditOutlined />
-                  </Link>
-                </Button>,
-                <Button type="danger">
-                  <Link to={`${path}/delete`}>
-                    <DeleteOutlined />
-                  </Link>
-                </Button>,
-                <Button
-                  type={data.public ? '' : 'danger'}
-                  onClick={() => this.handleTogglePublic(index, data.public)}
-                >
-                  {data.public ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-                </Button>,
-              ]}
-            >
-              <div className={index == selectedArticle ? styles.maxContent : styles.minContent}>
-                {data.content}
-              </div>
-              <h5>{data.date}</h5>
-            </Card>
-          </div>
-        </Col>
-      );
-    });
-
+    const { path, data, list, initLoading, loading, selectedArticle } = this.state;
+    const loadMore =
+      !initLoading && !loading ? (
+        <div
+          style={{
+            textAlign: 'center',
+            marginTop: 12,
+            height: 32,
+            lineHeight: '32px',
+          }}
+        >
+          <Button onClick={this.handleLoadMore}>loading more</Button>
+        </div>
+      ) : null;
     return (
       <div>
         <div className={styles.actionContainer}>
@@ -88,10 +97,44 @@ class ArticleList extends React.Component {
           </Button>
         </div>
         <Divider orientation="center">Article List</Divider>
-        <Scrollbars autoHide autoHeight autoHeightMin={480}>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{ margin: '0 8px' }}>
-            {article}
-          </Row>
+        <Scrollbars autoHide autoHeight autoHeightMin={460}>
+          <List
+            className={styles.listArticle}
+            loading={initLoading}
+            loadMore={loadMore}
+            itemLayout="horizontal"
+            dataSource={list}
+            renderItem={item => (
+              <List.Item
+                actions={[
+                  <Button onClick={() => this.handleReadArticle(item.id)}>
+                    <ReadOutlined />
+                  </Button>,
+                  <Button type="primary">
+                    <Link to={`${path}/edit`}>
+                      <EditOutlined />
+                    </Link>
+                  </Button>,
+                  <Button type="danger">
+                    <Link to={`${path}/delete`}>
+                      <DeleteOutlined />
+                    </Link>
+                  </Button>,
+                  <Button
+                    type={item.public ? '' : 'danger'}
+                    onClick={() => this.handleTogglePublic(item.id, item.public)}
+                  >
+                    {item.public ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                  </Button>,
+                ]}
+              >
+                <List.Item.Meta
+                  className={styles.titleArticle}
+                  title={<a href="#">{item.title}</a>}
+                />
+              </List.Item>
+            )}
+          />
         </Scrollbars>
       </div>
     );
