@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.css';
-import { Link } from 'UMI';
+import { Link, Redirect } from 'UMI';
 import { Layout, Menu, Breadcrumb, Avatar, Dropdown } from 'antd';
 import { PieChartOutlined, UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
 
@@ -21,6 +21,7 @@ const menu = (
 
 class LayoutCMS extends React.Component {
   state = {
+    isLogin: false,
     collapsed: false,
     selectedKey: window.location.pathname.split('/'),
   };
@@ -36,7 +37,7 @@ class LayoutCMS extends React.Component {
   };
 
   render() {
-    const { selectedKey } = this.state;
+    const { isLogin,selectedKey } = this.state;
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
@@ -72,7 +73,9 @@ class LayoutCMS extends React.Component {
             </Dropdown>
           </Header>
           <Breadcrumb className={styles.breakdcrum}></Breadcrumb>
-          <Content className={styles.content}>{this.props.children}</Content>
+          <Content className={styles.content}>
+            {isLogin ? this.props.children : <Redirect to="/login" />}
+          </Content>
         </Layout>
       </Layout>
     );
