@@ -10,7 +10,7 @@ export default {
       routes: [
         {
           routes: [
-            { path: '/', component: '../pages/analytic/index' },
+            { path: '/', component: '../pages/analytic/index' },    
             {
               path: '/user',
               component: '../pages/user/index',

@@ -1,27 +1,27 @@
 import React from 'react';
 import styles from '../index.css';
+import { Redirect } from 'UMI';
 import { Form, Button } from 'antd';
 import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 
 class Login extends React.Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
+
+  state = { token: "" }
+
+  componentDidMount = () => {
+    this.setState({token: window.location.search})
+    console.log(window.location.search)
+  }
 
   render() {
-    const uriGoogle = 'http://localhost/';
-    const uriGithub = 'http://localhost/';
+    const uriGoogle = 'http://localhost:3333/login';
+    const uriGithub = 'http://localhost:3333/';
     return (
-      <Form name="normal_login" className={styles.loginForm} onFinish={this.handleSubmit}>
+      <Form name="normal_login" className={styles.loginForm}>
         <Form.Item>
           <Button
             className={styles.loginGoogle}
-            href={`https://user-anm.herokuapp.com/oauth2/authorize/google?redirect_uri=${uriGoogle}`}
+            href={`https://user-anm-dev.herokuapp.com/oauth2/authorize/google?redirect_uri=${uriGoogle}`}
           >
             <GoogleOutlined />
             Sign in with Google
@@ -30,7 +30,7 @@ class Login extends React.Component {
         <Form.Item>
           <Button
             className={styles.loginGithub}
-            href={`https://user-anm.herokuapp.com/oauth2/authorize/github?redirect_uri=${uriGithub}`}
+            href={`https://user-anm-dev.herokuapp.com/oauth2/authorize/github?redirect_uri=${uriGithub}`}
           >
             <GithubOutlined />
             Sign in with Github
