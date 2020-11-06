@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../../global.css';
 import EditorJs from 'react-editor-js';
 import { EDITOR_JS_TOOLS } from '../../constEditor.js';
 
