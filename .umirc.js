@@ -10,23 +10,12 @@ export default {
       routes: [
         {
           routes: [
-            { path: '/', component: '../pages/analytic/index' },    
-            {
-              path: '/user',
-              component: '../pages/user/index',
-            },
-            {
-              path: '/article',
-              component: '../pages/article/index',
-            },
-            {
-              path: '/article/edit',
-              component: '../pages/article/edit',
-            },
-            {
-              path: '/article/create',
-              component: '../pages/article/create',
-            },
+            { path: '/', component: '../pages/analytic/index' },
+            { path: '/analytic', redirect: '/' },    
+            { path: '/user', component: '../pages/user/index',},
+            { path: '/article', component: '../pages/article/index',},
+            { path: '/article/edit', component: '../pages/article/edit',},
+            { path: '/article/create', component: '../pages/article/create',},
           ],
         },
       ],

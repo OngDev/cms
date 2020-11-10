@@ -21,10 +21,19 @@ const menu = (
 
 class LayoutCMS extends React.Component {
   state = {
-    isLogin: false,
+    token: "",
     collapsed: false,
     selectedKey: window.location.pathname.split('/'),
   };
+
+  componentDidMount = () => {
+    const token = localStorage.getItem('token')
+    if (token == "undefined" || token == null) {
+      setTimeout(() => window.location.replace("http://localhost:3333/login"), 0)
+    } else {
+      this.setState({token: token})
+    }
+  }
 
   UNSAFE_componentWillMount = () => {
     if (window.location.href.split('/')[3] === '') {
@@ -37,9 +46,10 @@ class LayoutCMS extends React.Component {
   };
 
   render() {
-    const { isLogin,selectedKey } = this.state;
+    const {token, selectedKey } = this.state;
     return (
-      <Layout style={{ minHeight: '100vh' }}>
+      <div>
+      {token ? <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <Menu theme="dark" defaultSelectedKeys={`${selectedKey}`} mode="inline">
             <Menu.Item key="analytic" disabled={false}>
@@ -74,10 +84,11 @@ class LayoutCMS extends React.Component {
           </Header>
           <Breadcrumb className={styles.breakdcrum}></Breadcrumb>
           <Content className={styles.content}>
-            {isLogin ? this.props.children : <Redirect to="/login" />}
+            {this.props.children}
           </Content>
         </Layout>
-      </Layout>
+      </Layout> : null}
+      </div>
     );
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from '../index.css';
-import { Redirect } from 'UMI';
 import { Form, Button } from 'antd';
 import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 
@@ -9,13 +8,17 @@ class Login extends React.Component {
   state = { token: "" }
 
   componentDidMount = () => {
-    this.setState({token: window.location.search})
-    console.log(window.location.search)
+    // let token = window.location.search.slice(7, 222)
+    let token = window.location.search.split(/[=,&]/)[1]
+    localStorage.setItem('token', token)
+    if (token) {
+      setTimeout(() => window.location.replace("http://localhost:3333/analytic?" + token), 0)
+    }
   }
 
   render() {
     const uriGoogle = 'http://localhost:3333/login';
-    const uriGithub = 'http://localhost:3333/';
+    const uriGithub = 'http://localhost:3333/login';
     return (
       <Form name="normal_login" className={styles.loginForm}>
         <Form.Item>
