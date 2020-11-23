@@ -25,11 +25,12 @@
     "@editorjs/table": "^1.2.2",
     "@editorjs/warning": "^1.1.1",
     "antd": "^4.4.2",
+    "axios": "^0.21.0",
     "dva": "^2.6.0-beta.6",
     "react": "^16.8.6",
     "react-custom-scrollbars": "^4.2.1",
-    "react-editor-js": "^1.6.2",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-editor-js": "^1.6.2"
   },
   "devDependencies": {
     "@editorjs/editorjs": "^2.18.0",
