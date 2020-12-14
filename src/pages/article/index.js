@@ -11,7 +11,7 @@ import {
   EyeOutlined,
   EyeInvisibleOutlined,
 } from '@ant-design/icons';
-import article from './dummydata';
+import article from "./dummydata";
 
 class ArticleList extends React.Component {
   state = {
@@ -22,7 +22,6 @@ class ArticleList extends React.Component {
     itemLoad: 3,
     initLoading: true,
     loading: false,
-    selectedArticle: '',
   };
 
   componentDidMount() {
@@ -55,13 +54,6 @@ class ArticleList extends React.Component {
     this.setState({ list: currentList });
   };
 
-  handleReadArticle = indexArticle => {
-    // console.log('ok ' + indexArticle);
-    // if (indexArticle != this.state.selectedArticle) {
-    //   this.setState({ selectedArticle: indexArticle });
-    // }
-  };
-
   handleTogglePublic = (articleId, state) => {
     let currentArticle = this.state.list;
     for (var i = 0; i < currentArticle.length; i++) {
@@ -73,7 +65,7 @@ class ArticleList extends React.Component {
   };
 
   render() {
-    const { path, data, list, initLoading, loading, selectedArticle } = this.state;
+    const { path, list, initLoading, loading} = this.state;
     const loadMore =
       !initLoading && !loading ? (
         <div
@@ -107,17 +99,12 @@ class ArticleList extends React.Component {
             renderItem={item => (
               <List.Item
                 actions={[
-                  <Button onClick={() => this.handleReadArticle(item.id)}>
+                  <Button>
                     <ReadOutlined />
                   </Button>,
                   <Button type="primary">
                     <Link to={`${path}/edit`}>
                       <EditOutlined />
-                    </Link>
-                  </Button>,
-                  <Button type="danger">
-                    <Link to={`${path}/delete`}>
-                      <DeleteOutlined />
                     </Link>
                   </Button>,
                   <Button
@@ -126,6 +113,11 @@ class ArticleList extends React.Component {
                   >
                     {item.public ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                   </Button>,
+                  <Button type="danger">
+                  <Link to={`${path}/delete`}>
+                    <DeleteOutlined />
+                  </Link>
+                </Button>,
                 ]}
               >
                 <List.Item.Meta
