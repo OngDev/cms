@@ -42,7 +42,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://keycloak.ongdev.com',
+    baseURL: process.env.KEYCLOAK_REMOTE_HOST,
     browserBaseURL: 'https://keycloak.ongdev.com',
     proxyHeaders: true,
     proxy: true,
@@ -78,6 +78,7 @@ export default {
   },
   router: {
     middleware: ['auth'],
+    routeNameSplitter: '/',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
