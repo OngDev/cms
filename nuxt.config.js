@@ -28,6 +28,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/dotenv',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -88,11 +89,4 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-
-  env: {
-    KEYCLOAK_REMOTE_HOST:
-      process.env.KEYCLOAK_REMOTE_HOST || 'https://keycloak.ongdev.com',
-    KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID || 'cms-client',
-    KEYCLOAK_REALM: process.env.KEYCLOAK_REALM || 'ongdeveco',
-  },
 }
